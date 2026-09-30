@@ -240,6 +240,9 @@
                            '(:ironclad-sb-vm-ea)))))
                ((member :arm64 *features*)
                 '(:ironclad-fast-mod64-arithmetic))))
+  #+dotcl
+  (list :ironclad-fast-mod32-arithmetic
+        :ironclad-fast-mod64-arithmetic)
   #+cmu
   (list (c:backend-byte-order c:*target-backend*)
         (if (= vm:word-bits 32)
@@ -259,7 +262,7 @@
   #+ecl
   (list :ironclad-fast-mod32-arithmetic
         :ironclad-fast-mod64-arithmetic)
-  #-(or sbcl cmu lispworks openmcl ecl)
+  #-(or sbcl cmu lispworks openmcl ecl dotcl)
   nil)
 
 (dolist (f (ironclad-implementation-features))
